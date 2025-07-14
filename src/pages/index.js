@@ -57,7 +57,7 @@ const TerminalAnimation = () => {
     // Outer div for the terminal frame, with a background image placeholder
     <div
       className="relative bg-cover bg-center rounded-lg shadow-lg w-[786px] h-[527px] flex items-start overflow-hidden" // Adjusted width and height
-      style={{ backgroundImage: `url('http://202.164.169.117:8080/terminal.png')`, backgroundColor: '#333' }} // Placeholder for terminal image
+      style={{ backgroundImage: `url('http://202.164.169.117:8080/terminal.png')`}} // Placeholder for terminal image
     >
       {/* Inner div to contain the animated text, positioned to simulate terminal content area */}
       <div className="absolute top-20 left-16 right-16 bottom-16 text-white font-mono">
@@ -83,8 +83,8 @@ const TerminalAnimation = () => {
 const App = () => {
   // State to hold portfolio data, potentially fetched from a Django backend
   const [portfolioData, setPortfolioData] = useState({
-    name: "Hope Joshua Galang",
-    about: "Hello! I'm a passionate developer with a knack for building engaging web applications. I enjoy turning complex problems into simple, beautiful, and intuitive designs. My expertise spans across various technologies, and I'm always eager to learn new things and take on exciting challenges.",
+    name: "Joshua Galang",
+    about: "I'm a passionate IT with a talent for crafting engaging, user-focused web applications. I specialize in designing intuitive experiences, working with cloud infrastructure, managing systems, and generating detailed reports. Curious and driven, I'm always looking for new challenges that push me to grow and make a meaningful impact through technology.",
     projects: [
       {
         id: 1,
@@ -386,7 +386,7 @@ const App = () => {
                   View Portfolio
                 </a>
                 <a
-                  href="#" // Placeholder for resume download link
+                  href="https://drive.usercontent.google.com/download?id=1atVtSXEr8ahoS79ReaEQ15o-xeREXLc7&export=download&authuser=0" // Placeholder for resume download link
                   className={`font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600' : 'bg-gray-300 text-gray-800 hover:bg-gray-400'}`}
                 >
                   Download Resume
@@ -412,8 +412,8 @@ const App = () => {
 
         {/* Projects Section - Parallax Waterfall */}
         <section className="py-16"> {/* Removed id="projects" from here */}
-          <h2 className={`text-4xl font-bold text-center mb-12 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}>My Skills</h2>
-          {portfolioData.projects.map((project, index) => (
+          {/* h2 className={`text-4xl font-bold text-center mb-12 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}> My Skills </h2>
+          */} {portfolioData.projects.map((project, index) => (
             <div
               key={project.id}
               id={`project-${project.id}`} // Added ID for Intersection Observer
