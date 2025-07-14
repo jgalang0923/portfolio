@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'; // Import useRef
+import React, { useState, useEffect, useRef } from 'react';
 import { Sun, Moon, Monitor } from 'lucide-react'; // Re-imported lucide-react icons
 
 // TerminalAnimation Component: Displays a typing and deleting terminal animation
@@ -125,7 +125,7 @@ const App = () => {
           { name: "MySQL", logo: "https://img.icons8.com/color/48/mysql-logo.png" }, // Added logo property
         ],
         backgroundColor: "#3B82F6", // Blue 500 for Creating Reports
-        background: "http://202.164.169.117:8080/code.jpg", // Placeholder for background image URL
+        background: "http://202.164.169.117:8080/code.png", // Placeholder for background image URL
       },
       {
         id: 4,
@@ -351,8 +351,8 @@ const App = () => {
         </header>
 
         {/* Hero Section */}
-        <section className={`relative py-20 mx-auto max-w-6xl ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-4 flex flex-col md:flex-row items-center md:items-start md:space-x-8 relative">
+        <section className={`relative min-h-screen flex items-center justify-center pt-6 ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}> {/* Added pt-12 to section */}
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-4 flex flex-col md:flex-row items-center md:space-x-8 relative"> {/* Removed pt-12 from this div */}
             {/* Text Content */}
             <div className="text-center md:text-left md:flex-grow mb-8 md:mb-0">
               <h2 className="text-5xl font-extrabold mb-2">{portfolioData.name}</h2>
@@ -373,15 +373,17 @@ const App = () => {
             </div>
             {/* Profile Picture Placeholder */}
             <div className="md:flex-none flex justify-end">
-              <div className="bg-gray-400 rounded-lg w-96 h-[400px] flex items-center justify-center text-gray-800 text-center">
-                Your Profile Picture
-              </div>
+              <img
+              src="http://202.164.169.117:8080/self.png"
+              alt="Hope Joshua Galang Profile"
+              className="rounded-lg w-[384px] h-[576px] object-cover"
+              />
             </div>
           </div>
         </section>
 
         {/* About Section */}
-        <section id="about" className={`py-16 mx-auto max-w-4xl px-6 lg:px-4`}>
+        <section id="about" className={`py-8 mx-auto max-w-4xl px-6 lg:px-4`}>
           <h2 className={`text-4xl font-bold text-center mb-8 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}>About Me</h2>
           <p className={`text-lg leading-relaxed text-center ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{portfolioData.about}</p>
         </section>
