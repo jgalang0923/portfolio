@@ -169,7 +169,7 @@ const App = () => {
   // Function to set theme to dark
   const setThemeDark = () => {
     setThemePreference('dark');
-    localStorage.setItem('dark', 'dark'); // Corrected localStorage key
+    localStorage.setItem('themePreference', 'dark'); // Corrected localStorage key
   };
 
   // Function to set theme to system preference
@@ -338,7 +338,7 @@ const App = () => {
                 <button
                   onClick={setThemeSystem}
                   className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium transition-colors duration-300 ${themePreference === 'system'
-                    ? 'bg-white text-indigo-700 shadow dark:bg-gray-700 dark:text-yellow-300'
+                    ? 'bg-gray-700 text-yellow-300 shadow' // Always show dark selected style for system button when active
                     : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                     }`}
                   aria-label="System mode"
