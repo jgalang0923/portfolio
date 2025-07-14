@@ -88,7 +88,7 @@ const App = () => {
     projects: [
       {
         id: 1,
-        title: "Cloud Services",
+        title: "Cloud Engineering",
         description: "Expertise in managing and deploying applications on leading cloud platforms.",
         technologies: [
           { name: "Google Cloud", logo: "https://img.icons8.com/fluency/48/google-cloud.png" }, // Added logo property
