@@ -97,7 +97,7 @@ const App = () => {
           { name: "Microsoft Azure", logo: "https://img.icons8.com/fluency/48/azure-1.png" }, // Added logo property
           { name: "Globe Cloud", logo: "https://companieslogo.com/img/orig/GTMEY-a1d3b2cf.png?t=1720244492" }, // Added logo property
         ],
-        backgroundColor: "#6366F1", // Indigo 500 for Cloud Services
+        backgroundColor: "#6366F1", // Reverted to original color for Cloud Services
         background: "http://202.164.169.117:8080/1.png", // Placeholder for background image URL
       },
       {
@@ -124,7 +124,7 @@ const App = () => {
           { name: "PostgreSQL", logo: "https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/96/external-postgre-sql-a-free-and-open-source-relational-database-management-system-logo-shadow-tal-revivo.png" }, // Added logo property
           { name: "MySQL", logo: "https://img.icons8.com/color/48/mysql-logo.png" }, // Added logo property
         ],
-        backgroundColor: "#3B82F6", // Blue 500 for Creating Reports
+        backgroundColor: "#b1dd9e", // Updated color to #b1dd9e for Web App Developer
         background: "http://202.164.169.117:8080/code.png", // Placeholder for background image URL
       },
       {
@@ -159,6 +159,9 @@ const App = () => {
   const projectRefs = useRef([]);
   // State to track if a project section is in view for animation
   const [projectsInView, setProjectsInView] = useState({});
+
+  // Ref for the header to calculate offset
+  const headerRef = useRef(null);
 
   // Function to set theme to light
   const setThemeLight = () => {
@@ -264,6 +267,23 @@ const App = () => {
     fetchData();
   }, []); // Empty dependency array means this runs once on component mount
 
+  // Smooth scroll function with offset for fixed header
+  const scrollToSection = (e, id) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(id);
+    if (targetElement && headerRef.current) {
+      const headerOffset = headerRef.current.offsetHeight;
+      const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
+
   return (
     // React.Fragment is used to return multiple top-level elements (style and div)
     <>
@@ -305,20 +325,21 @@ const App = () => {
       {/* Apply dark mode classes conditionally to the main div */}
       <div className={`min-h-screen font-inter antialiased transition-all duration-1500 ease-in-out ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
         {/* Header Section */}
-        <header className={`shadow-sm py-6 transition-colors duration-1500 ease-in-out ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
+        <header ref={headerRef} className={`shadow-sm py-6 transition-colors duration-1500 ease-in-out ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-4">
             <nav className="flex items-center space-x-2 w-full justify-end">
               <ul className="flex space-x-4 mr-4">
-                <li><a href="#about" className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300 hover:text-indigo-400' : 'text-white hover:text-gray-200'}`}>About</a></li>
-                <li><a href="#projects" className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300' : 'text-white'} hover:text-gray-200`}>My Skills</a></li>
-                <li><a href="#contact" className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300' : 'text-white'} hover:text-gray-200`}>Contact</a></li>
+                <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300 hover:text-indigo-400' : 'text-white hover:text-gray-200'}`}>About</a></li>
+                {/* Changed href and onClick to target the specific Cloud Services title */}
+                <li><a href="#projects" onClick={(e) => scrollToSection(e, 'projects')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300' : 'text-white'} hover:text-gray-200`}>My Skills</a></li>
+                <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300' : 'text-white'} hover:text-gray-200`}>Contact</a></li>
               </ul>
               {/* Theme Selection Buttons */}
               <div className="flex rounded-full bg-gray-200 dark:bg-gray-800 p-1">
                 <button
                   onClick={setThemeLight}
                   className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium transition-colors duration-300 ${themePreference === 'light'
-                    ? 'bg-white text-indigo-700 shadow'
+                    ? 'bg-[#FFFBF7] text-indigo-700 shadow'
                     : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                     }`}
                   aria-label="Light mode"
@@ -359,6 +380,7 @@ const App = () => {
               <div className="flex justify-center md:justify-start space-x-4">
                 <a
                   href="#projects"
+                  onClick={(e) => scrollToSection(e, 'projects')}
                   className={`font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ${darkMode ? 'bg-indigo-400 text-gray-900 hover:bg-indigo-300' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
                 >
                   View Portfolio
@@ -389,127 +411,135 @@ const App = () => {
         </section>
 
         {/* Projects Section - Parallax Waterfall */}
-        <section id="projects" className="py-16">
+        <section className="py-16"> {/* Removed id="projects" from here */}
           <h2 className={`text-4xl font-bold text-center mb-12 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}>My Skills</h2>
           {portfolioData.projects.map((project, index) => (
             <div
               key={project.id}
               id={`project-${project.id}`} // Added ID for Intersection Observer
               ref={(el) => (projectRefs.current[index] = el)} // Assign ref
-              className="relative h-screen flex items-center justify-center text-white overflow-hidden"
+              className="relative flex items-center justify-center text-white overflow-hidden"
               style={{
                 backgroundImage: `url(${project.background})`, // Re-added background image property
                 backgroundColor: project.backgroundColor, // Use specific background color from project data
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                backgroundAttachment: 'fixed',
+                backgroundAttachment: 'fixed', // Re-added fixed attachment for parallax effect
+                minHeight: '100vh', // Ensure the section itself is at least viewport height
               }}
             >
-              {/* Conditional rendering for Cloud Services (id: 1) */}
-              {project.id === 1 ? (
-                // Specific layout for Cloud Services
-                <div className="flex w-full h-full items-center justify-center relative z-10">
-                  {/* Left side: Logos */}
-                  <div className="flex flex-col items-center justify-center space-y-2 absolute left-[8%] top-1/2 -translate-y-1/2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <div
-                        key={tech.name}
-                        className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-popOut' : 'opacity-0'}`}
-                        style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
-                      >
-                        {/* Icon/Image for Technology */}
-                        {tech.logo && (
-                          <img
-                            src={tech.logo}
-                            alt={tech.name}
-                            className="w-16 h-32 object-contain mb-1" // Adjust size as needed
-                            onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=${tech.name.substring(0,1)}`; }} // Fallback
-                          />
-                        )}
-                        <span className="text-sm font-medium text-white">
-                          {tech.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+              {/* This is the wrapper for content that will scroll over the fixed background */}
+              {/* The content itself will be wrapped in a div that dictates the scrollable height */}
+              <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[200vh]">
+                {/* Conditional rendering for Cloud Services (id: 1) */}
+                {project.id === 1 ? (
+                  // Specific layout for Cloud Services
+                  <div className="flex w-full h-full items-center justify-center relative z-10">
+                    {/* Left side: Logos */}
+                    <div className="flex flex-col items-center justify-center space-y-2 absolute left-[8%] top-1/2 -translate-y-1/2">
+                      {/* New invisible div with id="projects" for precise scrolling */}
+                      <div id="projects"></div>
+                      {project.technologies.map((tech, techIndex) => (
+                        <div
+                          key={tech.name}
+                          className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-popOut' : 'opacity-0'}`}
+                          style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
+                        >
+                          {/* Icon/Image for Technology */}
+                          {tech.logo && (
+                            <img
+                              src={tech.logo}
+                              alt={tech.name}
+                              className="w-16 h-32 object-contain mb-1" // Adjust size as needed
+                              onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=${tech.name.substring(0,1)}`; }} // Fallback
+                            />
+                          )}
+                          <span className="text-sm font-medium text-white">
+                            {tech.name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
 
-                  {/* Center side: Title, Description with Oval Background */}
-                  <div className="flex flex-col items-center text-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[70%]">
-                    {/* Wrapper for the title and description, which will have the oval background */}
-                    <div className="relative px-8 py-4 flex flex-col items-center justify-center">
-                        {/* The oval background itself */}
-                        <div className="absolute inset-0 rounded-full" style={{ backgroundColor: darkMode ? 'rgba(16, 24, 40, 0.5)' : 'rgba(243, 244, 246, 0.5)' }}></div>
-                        
-                        {/* Title */}
-                        <h3
-                            className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
-                            style={{ animationDelay: '0.1s' }}
-                        >
-                            {project.title}
-                        </h3>
-                        {/* Description */}
-                        <p
-                            className={`text-xl ${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
-                            style={{ animationDelay: '0.3s' }}
-                        >
-                            {project.description}
-                        </p>
+                    {/* Center side: Title, Description with Oval Background */}
+                    <div className="flex flex-col items-center text-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[70%]">
+                      {/* Wrapper for the title and description, which will have the oval background */}
+                      <div className="relative px-8 py-4 flex flex-col items-center justify-center">
+                          {/* The oval background itself */}
+                          <div className="absolute inset-0 rounded-full" style={{ backgroundColor: darkMode ? 'rgba(16, 24, 40, 0.5)' : 'rgba(243, 244, 246, 0.5)' }}></div>
+                          
+                          {/* Title */}
+                          <h3
+                              id="cloud-services-title" // Added ID here
+                              className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
+                              style={{ animationDelay: '0.1s' }}
+                          >
+                              {project.title}
+                          </h3>
+                          {/* Description */}
+                          <p
+                              className={`text-xl ${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
+                              style={{ animationDelay: '0.3s' }}
+                          >
+                              {project.description}
+                          </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                // Layout for System Administrator and Creating Reports (now also centered text)
-                <div className="flex w-full h-full items-center justify-center relative z-10">
-                  {/* Left side: Logos */}
-                  <div className="flex flex-col items-center justify-center space-y-2 absolute left-[8%] top-1/2 -translate-y-1/2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <div
-                        key={tech.name}
-                        className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-popOut' : 'opacity-0'}`}
-                        style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
-                      >
-                        {/* Icon/Image for Technology */}
-                        {tech.logo && (
-                          <img
-                            src={tech.logo}
-                            alt={tech.name}
-                            className="w-16 h-32 object-contain mb-1 rounded-lg" // Adjust size as needed
-                            onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=${tech.name.substring(0,1)}`; }} // Fallback
-                          />
-                        )}
-                        <span className="text-sm font-medium text-white">
-                          {tech.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Central content block: Title, Description, and Terminal */}
-                  <div className="flex flex-col items-center text-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[70%]">
-                    {/* Wrapper for the title and description, which will have the oval background */}
-                    <div className="relative px-8 py-4 flex flex-col items-center justify-center">
-                        {/* The oval background itself */}
-                        <div className="absolute inset-0 rounded-full" style={{ backgroundColor: darkMode ? 'rgba(16, 24, 40, 0.5)' : 'rgba(243, 244, 246, 0.5)' }}></div>
-                        {/* Title */}
-                        <h3
-                            className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
-                            style={{ animationDelay: '0.1s' }}
+                ) : (
+                  // Layout for System Administrator and Creating Reports (now also centered text)
+                  <div className="flex w-full h-full items-center justify-center relative z-10">
+                    {/* Left side: Logos */}
+                    <div className="flex flex-col items-center justify-center space-y-2 absolute left-[8%] top-1/2 -translate-y-1/2">
+                      {project.technologies.map((tech, techIndex) => (
+                        <div
+                          key={tech.name}
+                          className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-popOut' : 'opacity-0'}`}
+                          style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
                         >
-                            {project.title}
-                        </h3>
-                        {/* Description */}
-                        <p className={`${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10`}>
-                            {project.description}
-                        </p>
+                          {/* Icon/Image for Technology */}
+                          {tech.logo && (
+                            <img
+                              src={tech.logo}
+                              alt={tech.name}
+                              className="w-16 h-32 object-contain mb-1 rounded-lg" // Adjust size as needed
+                              onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=${tech.name.substring(0,1)}`; }} // Fallback
+                            />
+                          )}
+                          <span className="text-sm font-medium text-white">
+                            {tech.name}
+                          </span>
+                        </div>
+                      ))}
                     </div>
-                    {project.id === 2 && ( // Only render TerminalAnimation for System Administrator
-                      <div className={`mt-6 relative z-10`}>
-                        <TerminalAnimation />
+
+                    {/* Central content block: Title, Description, and Terminal */}
+                    <div className="flex flex-col items-center text-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[70%]">
+                      {/* Wrapper for the title and description, which will have the oval background */}
+                      <div className="relative px-8 py-4 flex flex-col items-center justify-center">
+                          {/* The oval background itself */}
+                          <div className="absolute inset-0 rounded-full" style={{ backgroundColor: darkMode ? 'rgba(16, 24, 40, 0.5)' : 'rgba(243, 244, 246, 0.5)' }}></div>
+                          {/* Title */}
+                          <h3
+                              className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
+                              style={{ animationDelay: '0.1s' }}
+                          >
+                              {project.title}
+                          </h3>
+                          {/* Description */}
+                          <p className={`${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10`}>
+                              {project.description}
+                          </p>
                       </div>
-                    )}
+                      {project.id === 2 && ( // Only render TerminalAnimation for System Administrator
+                        <div className={`mt-6 relative z-10`}>
+                          <TerminalAnimation />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           ))}
         </section>
@@ -527,7 +557,7 @@ const App = () => {
             <a href={`https://github.com/${portfolioData.github}`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>github.com/{portfolioData.github}</a>
             </p>
             <p className="flex items-center justify-center">
-              <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn icon" className="w-6 h-6 mr-2" onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=L`; }} />
+              <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn icon" className="w-6 h-6 mr-2" onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=L`; }} />
               <a href={`https://www.linkedin.com/in/galangjoshua/`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>linkedin.com/in/galangjoshua</a>
             </p>
           </div>
