@@ -1,5 +1,3 @@
-// pages/index.js (Your main application file in a Next.js project)
-
 import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head'; // Import the Head component
 import Image from 'next/image'; // Import Next.js Image component
@@ -73,19 +71,18 @@ export default function Home({ portfolioData }) { // Changed to default export f
   return (
     <>
       <Head>
-        <title>{portfolioData.name} - Portfolio</title>
-        <meta name="description" content={portfolioData.about} />
-        <meta name="keywords" content="A simple web portfolio" />
-        <meta name="author" content={portfolioData.name} />
+        <title>Welcome</title>
+        <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta charSet="UTF-8" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="YOUR_PORTFOLIO_URL_HERE" /> {/* Replace with your actual URL */}
-        <meta property="og:title" content={`${portfolioData.name} - Portfolio`} />
-        <meta property="og:description" content={portfolioData.about} />
-        <meta property="og:image" content="/images/og-image.jpg" /> {/* Recommended: Create an Open Graph image */}
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Short, clear description of your page." />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="en" />
+        <meta name="theme-color" content="#FFFBF7C" />
+        <meta name="author" content="Joshua Galang" />
+        <link rel="canonical" href="https://jgalang.com" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/png" sizes="16x16" href="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-hypertext-markup-language-programming-for-web-pages-and-application-text-color-tal-revivo.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-hypertext-markup-language-programming-for-web-pages-and-application-text-color-tal-revivo.png" />
       </Head>
 
       <div className={`min-h-screen font-inter antialiased transition-all duration-1500 ease-in-out ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
