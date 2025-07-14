@@ -57,7 +57,7 @@ const TerminalAnimation = () => {
     // Outer div for the terminal frame, with a background image placeholder
     <div
       className="relative bg-cover bg-center rounded-lg shadow-lg w-[786px] h-[527px] flex items-start overflow-hidden" // Adjusted width and height
-      style={{ backgroundImage: `url('/images/terminal.png')`}} // Placeholder for terminal image
+      style={{ backgroundImage: `url('/images/terminal.webp')`}} // Placeholder for terminal image
     >
       {/* Inner div to contain the animated text, positioned to simulate terminal content area */}
       <div className="absolute top-20 left-16 right-16 bottom-16 text-white font-mono">
@@ -98,7 +98,7 @@ const App = () => {
           { name: "Globe Cloud", logo: "https://companieslogo.com/img/orig/GTMEY-a1d3b2cf.png?t=1720244492" }, // Added logo property
         ],
         backgroundColor: "#6366F1", // Reverted to original color for Cloud Services
-        background: "/images/1.png", // Placeholder for background image URL
+        background: "/images/1.webp", // Placeholder for background image URL
       },
       {
         id: 2,
@@ -111,7 +111,7 @@ const App = () => {
           { name: "Tomcat", logo: "https://img.icons8.com/color/48/tomcat.png"},
         ],
         backgroundColor: "#EF4444", // Red 500 for System Administrator
-        background: "/images/2.png", // Placeholder for background image URL
+        background: "/images/2.webp", // Placeholder for background image URL
       },
       {
         id: 3,
@@ -125,7 +125,7 @@ const App = () => {
           { name: "MySQL", logo: "https://img.icons8.com/color/48/mysql-logo.png" }, // Added logo property
         ],
         backgroundColor: "#b1dd9e", // Updated color to #b1dd9e for Web App Developer
-        background: "/images/code.png", // Placeholder for background image URL
+        background: "/images/code.webp", // Placeholder for background image URL
       },
       {
         id: 4,
@@ -136,7 +136,7 @@ const App = () => {
           { name: "TIBCO Jaspersoft", logo: "https://logodix.com/logo/1745696.jpg" } // Added logo property
         ],
         backgroundColor: "#3B82F6", // Blue 500 for Creating Reports
-        background: "/images/3.png", // Placeholder for background image URL
+        background: "/images/3.webp", // Placeholder for background image URL
       }
     ],
     contactEmail: "joshuagalang8@gmail.com",
