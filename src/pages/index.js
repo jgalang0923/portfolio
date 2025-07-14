@@ -125,7 +125,7 @@ const App = () => {
           { name: "MySQL", logo: "https://img.icons8.com/color/48/mysql-logo.png" }, // Added logo property
         ],
         backgroundColor: "#3B82F6", // Blue 500 for Creating Reports
-        background: "", // Placeholder for background image URL
+        background: "http://202.164.169.117:8080/code.jpg", // Placeholder for background image URL
       },
       {
         id: 4,
