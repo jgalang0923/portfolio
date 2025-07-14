@@ -303,9 +303,9 @@ const App = () => {
         `}
       </style>
       {/* Apply dark mode classes conditionally to the main div */}
-      <div className={`min-h-screen font-inter antialiased ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
+      <div className={`min-h-screen font-inter antialiased transition-all duration-1500 ease-in-out ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
         {/* Header Section */}
-        <header className={`shadow-sm py-6 ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
+        <header className={`shadow-sm py-6 transition-colors duration-1500 ease-in-out ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-4">
             <nav className="flex items-center space-x-2 w-full justify-end">
               <ul className="flex space-x-4 mr-4">
@@ -519,15 +519,15 @@ const App = () => {
           <h2 className={`text-4xl font-bold text-center mb-8 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}>Get In Touch</h2>
           <div className="text-center text-lg text-gray-700 dark:text-gray-300">
             <p className="mb-2 flex items-center justify-center">
-              <img src="https://img.icons8.com/fluency/48/new-post.png" alt="Email icon" className="w-6 h-6 mr-2" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/24x24/CCCCCC/333333?text=E'; }} />
+              <img src="https://img.icons8.com/fluency/48/new-post.png" alt="Email icon" className="w-6 h-6 mr-2" onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=E`; }} />
               <a href={`mailto:${portfolioData.contactEmail}`} className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>{portfolioData.contactEmail}</a>
             </p>
             <p className="mb-2 flex items-center justify-center">
-              <img src="https://img.icons8.com/color/48/github--v1.png" alt="GitHub icon" className="w-6 h-6 mr-2" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/24x24/CCCCCC/333333?text=G'; }} />
+              <img src="https://img.icons8.com/color/48/github--v1.png" alt="GitHub icon" className="w-6 h-6 mr-2" onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=G`; }} />
             <a href={`https://github.com/${portfolioData.github}`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>github.com/{portfolioData.github}</a>
             </p>
             <p className="flex items-center justify-center">
-              <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn icon" className="w-6 h-6 mr-2" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/24x24/CCCCCC/333333?text=L'; }} />
+              <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn icon" className="w-6 h-6 mr-2" onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=L`; }} />
               <a href={`https://www.linkedin.com/in/galangjoshua/`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>linkedin.com/in/galangjoshua</a>
             </p>
           </div>
