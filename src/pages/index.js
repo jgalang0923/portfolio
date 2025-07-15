@@ -212,8 +212,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
                 backgroundPosition: 'center',
                 backgroundAttachment: 'fixed',
                 minHeight: '100vh',
-              }}
-            >
+              }}>
               {/* Ensure this inner div takes full height of its parent and centers content */}
               {/* Increased min-h to 200vh to allow for more scrolling before content moves */}
               <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[200vh]">
@@ -233,7 +232,6 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
                       {project.description}
                     </p>
                   </div>
-
                   {/* Technologies (Icons) - positioned horizontally below the oval, with animation */}
                   <div className="flex flex-row flex-wrap justify-center items-center gap-4">
                     {project.technologies.map((tech, techIndex) => (
@@ -256,12 +254,16 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
                       </div>
                     ))}
                   </div>
+                    {project.id === 2 && (
+                    <div className={`mt-8 relative z-10 w-full flex justify-center ${projectsInView[`project-${project.id}`] }`} style={{ animationDelay: `${0.5 + project.technologies.length * 0.1 + 0.2}s` }}>
+                    <TerminalAnimation />
+                    </div>
+                    )}
                 </div>
               </div>
             </div>
           ))}
         </section>
-
         {/* Contact Section */}
         <section id="contact" className={`py-16 shadow-md rounded-lg mx-auto max-w-4xl mt-8 mb-12 px-6 lg:px-4 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
           <h2 className={`text-4xl font-bold text-center mb-8 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}>Get In Touch</h2>
