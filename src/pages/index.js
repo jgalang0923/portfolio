@@ -69,7 +69,7 @@ export default function Home({ portfolioData: propPortfolioData }) {
             <nav className="flex items-center w-full justify-between">
               <div className="flex items-center space-x-2">
                 <img
-                  src="/images/logo.webp"
+                  src="/images/logo-680.webp"
                   alt="Logo"
                   className="w-12 h-12 rounded-full"
                   onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/40x40/CCCCCC/333333?text=P`; }}

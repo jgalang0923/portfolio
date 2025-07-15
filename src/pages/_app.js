@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
         <meta name="author" content="JGalang"/>
         <meta property="og:title" content="JGalang" />
         <meta property="og:description" content="JGalang" />
-        <meta property="og:image" content="/images/logo.webp" />
+        <meta property="og:image" content="https://www.jgalang.com/images/logo-1200.webp" />
         <meta property="og:url" content="https://jgalang.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:image:width" content="1200" />
