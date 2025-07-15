@@ -71,6 +71,44 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
 
   return (
     <>
+      {/* Inline CSS for animations */}
+      <style>
+        {`
+        @keyframes slideInFromTop {
+          from {
+            opacity: 0;
+            transform: translateY(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-slideInFromTop {
+          animation: slideInFromTop 0.6s ease-out forwards;
+        }
+
+        @keyframes popOut {
+          0% {
+            opacity: 0;
+            transform: scale(0.5);
+          }
+          75% {
+            opacity: 1;
+            transform: scale(1.1);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+
+        .animate-popOut {
+          animation: popOut 0.8s ease-out forwards;
+        }
+        `}
+      </style>
+
       <div className={`min-h-screen font-inter antialiased transition-all duration-1500 ease-in-out ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
         {/* Header Section */}
         <header ref={headerRef} className={`shadow-sm py-6 transition-colors duration-1500 ease-in-out ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
@@ -126,7 +164,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
               <h2 className="text-5xl font-extrabold mb-2">{portfolioData.name}</h2>
               <div className="flex justify-center md:justify-start space-x-4">
                 <a
-                  href="#project-1" // Changed to project-1 for Cloud Engineering
+                  href="#project-1"
                   onClick={(e) => scrollToSection(e, 'project-1')}
                   className={`font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ${darkMode ? 'bg-indigo-400 text-gray-900 hover:bg-indigo-300' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
                 >
@@ -181,29 +219,27 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
               <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[200vh]">
                 {/* This is the container for the oval and the technologies */}
                 <div className="flex flex-col items-center text-center max-w-[70%]">
-                  {/* Oval (Title & Description) */}
+                  {/* Oval (Title & Description) - Removed animation classes from here */}
                   <div className="relative px-8 py-4 flex flex-col items-center justify-center mb-8">
                     <div className="absolute inset-0 rounded-full" style={{ backgroundColor: darkMode ? 'rgba(16, 24, 40, 0.5)' : 'rgba(243, 244, 246, 0.5)' }}></div>
                     <h3
-                      className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
-                      style={{ animationDelay: '0.1s' }}
+                      className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10`} // Removed animation class
                     >
                       {project.title}
                     </h3>
                     <p
-                      className={`text-xl ${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
-                      style={{ animationDelay: '0.3s' }}
+                      className={`text-xl ${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10`} // Removed animation class
                     >
                       {project.description}
                     </p>
                   </div>
 
-                  {/* Technologies (Icons) - positioned horizontally below the oval */}
+                  {/* Technologies (Icons) - positioned horizontally below the oval, with animation */}
                   <div className="flex flex-row flex-wrap justify-center items-center gap-4">
                     {project.technologies.map((tech, techIndex) => (
                       <div
                         key={tech.name}
-                        className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-popOut' : 'opacity-0'}`}
+                        className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`} // Animation remains here
                         style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
                       >
                         {tech.logo && (
