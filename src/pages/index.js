@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Sun, Moon, Monitor } from 'lucide-react';
 import { portfolioData as staticPortfolioData } from '/src/data/portfolioData';
 import useTheme from '/src/hooks/useTheme';
-import ContactSection from './ContactSection';
+import ContactSection from '/src/pages/ContactSection';
 import TerminalAnimation from '/src/components/TerminalAnimation';
 
 export default function Home({ portfolioData: propPortfolioData }) { // Changed to default export for Next.js page
