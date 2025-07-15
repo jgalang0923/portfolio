@@ -2,6 +2,8 @@
 import React from 'react';
 
 const ContactSection = ({ darkMode, portfolioData }) => {
+ const { contactEmail, github, linkedin } = portfolioData;
+  
   return (
     <section id="contact" className={`py-16 shadow-md rounded-lg mx-auto max-w-4xl mt-8 mb-12 px-6 lg:px-4 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
       <h2 className={`text-4xl font-bold text-center mb-8 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}>Get In Touch</h2>
