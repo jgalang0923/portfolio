@@ -69,46 +69,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
     }
   };
 
-  return (
-    <>
-      {/* Inline CSS for animations */}
-      <style>
-        {`
-        @keyframes slideInFromTop {
-          from {
-            opacity: 0;
-            transform: translateY(-50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-slideInFromTop {
-          animation: slideInFromTop 0.6s ease-out forwards;
-        }
-
-        @keyframes popOut {
-          0% {
-            opacity: 0;
-            transform: scale(0.5);
-          }
-          75% {
-            opacity: 1;
-            transform: scale(1.1);
-          }
-          100% {
-            transform: scale(1);
-          }
-        }
-
-        .animate-popOut {
-          animation: popOut 0.8s ease-out forwards;
-        }
-        `}
-      </style>
-
+  return (<>
       <div className={`min-h-screen font-inter antialiased transition-all duration-1500 ease-in-out ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
         {/* Header Section */}
         <header ref={headerRef} className={`shadow-sm py-6 transition-colors duration-1500 ease-in-out ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
@@ -183,7 +144,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
             {/* Profile Picture (using standard img tag) */}
             <div className="md:flex-none flex justify-end">
               <img
-                src="https://placehold.co/384x576/CCCCCC/333333?text=Profile" // Placeholder for self.webp
+                src="/images/self.webp" // Placeholder for self.webp
                 alt="Hope Joshua Galang Profile"
                 className="rounded-lg w-[384px] h-[576px] object-cover"
               />
@@ -238,8 +199,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
                       <div
                         key={tech.name}
                         className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`} // Animation remains here
-                        style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
-                      >
+                        style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}>
                         {tech.logo && (
                           <img
                             src={tech.logo}
