@@ -1,8 +1,9 @@
+// pages/index.js (Your main application file in a Next.js project)
+
 import React, { useState, useEffect, useRef } from 'react';
-import Head from 'next/head'; // Import the Head component
 import Image from 'next/image'; // Import Next.js Image component
 import { Sun, Moon, Monitor } from 'lucide-react';
-import { Analytics } from "@vercel/analytics/next";
+// Import separated components and hooks
 import TerminalAnimation from '/src/components/TerminalAnimation';
 import useTheme from '/src/hooks/useTheme';
 import { portfolioData as staticPortfolioData } from '/src/data/portfolioData'; // Renamed to avoid confusion with prop name
@@ -70,21 +71,6 @@ export default function Home({ portfolioData }) { // Changed to default export f
 
   return (
     <>
-      <Head>
-        <title>Welcome</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Short, clear description of your page." />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="en" />
-        <meta name="theme-color" content="#FFFBF7C" />
-        <meta name="author" content="Joshua Galang" />
-        <link rel="canonical" href="https://jgalang.com" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="icon" type="image/png" sizes="16x16" href="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-hypertext-markup-language-programming-for-web-pages-and-application-text-color-tal-revivo.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-hypertext-markup-language-programming-for-web-pages-and-application-text-color-tal-revivo.png" />
-      </Head>
-
       <div className={`min-h-screen font-inter antialiased transition-all duration-1500 ease-in-out ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
         {/* Header Section */}
         <header ref={headerRef} className={`shadow-sm py-6 transition-colors duration-1500 ease-in-out ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
@@ -159,7 +145,7 @@ export default function Home({ portfolioData }) { // Changed to default export f
             {/* Profile Picture (using Next.js Image component) */}
             <div className="md:flex-none flex justify-end">
               <Image
-                src="/images/self.webp" // Google Drive URL
+                src="/images/self.webp"
                 alt="Hope Joshua Galang Profile"
                 className="rounded-lg w-[384px] h-[576px] object-cover"
                 width={384}
@@ -316,7 +302,7 @@ export default function Home({ portfolioData }) { // Changed to default export f
                 width={24} height={24}
                 unoptimized={true}
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=G`; }} />
-              <a href={`https://github.com/${portfolioData.github}`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>github.com/{portfolioData.github}</a>
+            <a href={`https://github.com/${portfolioData.github}`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>github.com/{portfolioData.github}</a>
             </p>
             <p className="flex items-center justify-center">
               <Image
