@@ -66,44 +66,55 @@ export default function Home({ portfolioData: propPortfolioData }) {
         {/* Header Section */}
         <header ref={headerRef} className={`shadow-sm py-6 transition-colors duration-1500 ease-in-out ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-4">
-            <nav className="flex items-center space-x-2 w-full justify-end">
-              <ul className="flex space-x-4 mr-4">
-                <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300 hover:text-indigo-400' : 'text-white hover:text-gray-200'}`}>About</a></li>
-                <li><a href="#projects" onClick={(e) => scrollToSection(e, 'projects')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300' : 'text-white'} hover:text-gray-200`}>My Skills</a></li>
-                <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300' : 'text-white'} hover:text-gray-200`}>Contact</a></li>
-              </ul>
-              {/* Theme Selection Buttons */}
-              <div className="flex rounded-full bg-gray-200 dark:bg-gray-800 p-1">
-                <button
-                  onClick={setThemeLight}
-                  className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium transition-colors duration-300 ${themePreference === 'light'
-                    ? 'bg-[#FFFBF7] text-indigo-700 shadow'
-                    : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
-                    }`}
-                  aria-label="Light mode"
-                >
-                  <Sun className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={setThemeDark}
-                  className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium transition-colors duration-300 ${themePreference === 'dark'
-                    ? 'bg-gray-700 text-yellow-300 shadow dark:bg-gray-700'
-                    : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
-                    }`}
-                  aria-label="Dark mode"
-                >
-                  <Moon className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={setThemeSystem}
-                  className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium transition-colors duration-300 ${themePreference === 'system'
-                    ? 'bg-gray-700 text-yellow-300 shadow'
-                    : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
-                    }`}
-                  aria-label="System mode"
-                >
-                  <Monitor className="w-5 h-5" />
-                </button>
+            <nav className="flex items-center w-full justify-between">
+              <div className="flex items-center space-x-2">
+                <img
+                  src="/images/logo.webp"
+                  alt="Logo"
+                  className="w-12 h-12 rounded-full"
+                  onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/40x40/CCCCCC/333333?text=P`; }}
+                />
+                {/* You can add text next to the logo if needed, e.g., <span className="text-white text-xl font-bold">My Portfolio</span> */}
+              </div>
+              <div className="flex items-center space-x-2">
+                <ul className="flex space-x-4 mr-4">
+                  <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300 hover:text-indigo-400' : 'text-white hover:text-gray-200'}`}>About</a></li>
+                  <li><a href="#projects" onClick={(e) => scrollToSection(e, 'projects')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300' : 'text-white'} hover:text-gray-200`}>My Skills</a></li>
+                  <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className={`p-2 rounded-md transition duration-300 ${darkMode ? 'text-gray-300' : 'text-white'} hover:text-gray-200`}>Contact</a></li>
+                </ul>
+                {/* Theme Selection Buttons */}
+                <div className="flex rounded-full bg-gray-200 dark:bg-gray-800 p-1">
+                  <button
+                    onClick={setThemeLight}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium transition-colors duration-300 ${themePreference === 'light'
+                      ? 'bg-[#FFFBF7] text-indigo-700 shadow'
+                      : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                      }`}
+                    aria-label="Light mode"
+                  >
+                    <Sun className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={setThemeDark}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium transition-colors duration-300 ${themePreference === 'dark'
+                      ? 'bg-gray-700 text-yellow-300 shadow dark:bg-gray-700'
+                      : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                      }`}
+                    aria-label="Dark mode"
+                  >
+                    <Moon className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={setThemeSystem}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium transition-colors duration-300 ${themePreference === 'system'
+                      ? 'bg-gray-700 text-yellow-300 shadow'
+                      : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                      }`}
+                    aria-label="System mode"
+                  >
+                    <Monitor className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </nav>
           </div>
