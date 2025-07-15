@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sun, Moon, Monitor } from 'lucide-react';
-import TerminalAnimation from '/src/components/TerminalAnimation';
-import useTheme from '/src/hooks/useTheme';
 import { portfolioData as staticPortfolioData } from '/src/data/portfolioData';
+import useTheme from '/src/hooks/useTheme';
 import ContactSection from './ContactSection';
+import TerminalAnimation from '/src/components/TerminalAnimation';
 
 // Main App Component for the portfolio
 // In Next.js, this is your page component. It receives data via props if getStaticProps is used.
@@ -69,7 +69,8 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
     }
   };
 
-  return (<>
+  return (
+    <>
       <div className={`min-h-screen font-inter antialiased transition-all duration-1500 ease-in-out ${darkMode ? 'bg-black text-gray-100' : 'bg-[#FFFBF7] text-gray-800'}`}>
         {/* Header Section */}
         <header ref={headerRef} className={`shadow-sm py-6 transition-colors duration-1500 ease-in-out ${darkMode ? 'bg-gray-900' : 'bg-[#1C398E]'}`}>
@@ -145,7 +146,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
             <div className="md:flex-none flex justify-end">
               <img
                 src="/images/self.webp" // Placeholder for self.webp
-                alt="Hope Joshua Galang Profile"
+                alt="Me"
                 className="rounded-lg w-[384px] h-[576px] object-cover"
               />
             </div>
@@ -173,7 +174,8 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
                 backgroundPosition: 'center',
                 backgroundAttachment: 'fixed',
                 minHeight: '100vh',
-              }}>
+              }}
+            >
               {/* Ensure this inner div takes full height of its parent and centers content */}
               {/* Increased min-h to 200vh to allow for more scrolling before content moves */}
               <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[200vh]">
@@ -193,13 +195,15 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
                       {project.description}
                     </p>
                   </div>
+
                   {/* Technologies (Icons) - positioned horizontally below the oval, with animation */}
                   <div className="flex flex-row flex-wrap justify-center items-center gap-4">
                     {project.technologies.map((tech, techIndex) => (
                       <div
                         key={tech.name}
                         className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`} // Animation remains here
-                        style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}>
+                        style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
+                      >
                         {tech.logo && (
                           <img
                             src={tech.logo}
@@ -214,17 +218,22 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
                       </div>
                     ))}
                   </div>
-                    {project.id === 2 && (
-                    <div className={`mt-8 relative z-10 w-full flex justify-center ${projectsInView[`project-${project.id}`]}`} style={{ animationDelay: `${0.5 + project.technologies.length * 0.1 + 0.2}s` }}>
-                    <TerminalAnimation />
-                    </div>
-                    )}
                 </div>
+                {/* Terminal Animation for System Administrator section - Conditional rendering for screen size */}
+                {project.id === 2 && (
+                  <div className={`mt-8 relative z-10 w-full hidden md:flex justify-center`}>
+                    <TerminalAnimation />
+                  </div>
+                )}
               </div>
             </div>
           ))}
         </section>
-         <ContactSection darkMode={darkMode} portfolioData={portfolioData} />
+
+        {/* Render the ContactSection component, passing necessary props */}
+        <ContactSection darkMode={darkMode} portfolioData={portfolioData} />
+
+        {/* Footer */}
         <footer className={`py-8 text-center ${darkMode ? 'bg-gray-950 text-gray-400' : 'bg-[#1C398E] text-gray-100'}`}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-sm md:text-base">&copy; {new Date().getFullYear()} {portfolioData.name}. All rights reserved.</p>
