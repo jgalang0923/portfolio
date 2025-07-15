@@ -2,7 +2,9 @@
 import React from 'react';
 
 const ContactSection = ({ darkMode, portfolioData }) => {
- const { contactEmail, github, linkedin } = portfolioData;
+  const email = data?.contactEmail;
+  const github = data?.github;
+  const linkedin = data?.linkedin;
   
   return (
     <section id="contact" className={`py-16 shadow-md rounded-lg mx-auto max-w-4xl mt-8 mb-12 px-6 lg:px-4 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
