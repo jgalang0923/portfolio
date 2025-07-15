@@ -59,7 +59,8 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
     if (targetElement && headerRef.current) {
       const headerOffset = headerRef.current.offsetHeight;
       const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
+      // Calculate scroll position to center the target element
+      const offsetPosition = elementPosition - (window.innerHeight / 2) + (targetElement.offsetHeight / 2);
 
       window.scrollTo({
         top: offsetPosition,
@@ -125,8 +126,8 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
               <h2 className="text-5xl font-extrabold mb-2">{portfolioData.name}</h2>
               <div className="flex justify-center md:justify-start space-x-4">
                 <a
-                  href="#projects"
-                  onClick={(e) => scrollToSection(e, 'projects')}
+                  href="#project-1" // Changed to project-1 for Cloud Engineering
+                  onClick={(e) => scrollToSection(e, 'project-1')}
                   className={`font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ${darkMode ? 'bg-indigo-400 text-gray-900 hover:bg-indigo-300' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
                 >
                   View Portfolio
@@ -144,7 +145,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
             {/* Profile Picture (using standard img tag) */}
             <div className="md:flex-none flex justify-end">
               <img
-                src="/images/self.webp" // Placeholder for self.webp
+                src="https://placehold.co/384x576/CCCCCC/333333?text=Profile" // Placeholder for self.webp
                 alt="Hope Joshua Galang Profile"
                 className="rounded-lg w-[384px] h-[576px] object-cover"
               />
