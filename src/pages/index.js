@@ -1,18 +1,18 @@
-// pages/index.js (Your main application file in a Next.js project)
-
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image'; // Import Next.js Image component
 import { Sun, Moon, Monitor } from 'lucide-react';
-// Import separated components and hooks
 import TerminalAnimation from '/src/components/TerminalAnimation';
 import useTheme from '/src/hooks/useTheme';
 import { portfolioData as staticPortfolioData } from '/src/data/portfolioData'; // Renamed to avoid confusion with prop name
 
 // Main App Component for the portfolio
 // In Next.js, this is your page component. It receives data via props if getStaticProps is used.
-export default function Home({ portfolioData }) { // Changed to default export for Next.js page
+export default function Home({ portfolioData: propPortfolioData }) { // Changed to default export for Next.js page
   // Use the custom useTheme hook for all theme logic
   const { darkMode, themePreference, setThemeLight, setThemeDark, setThemeSystem } = useTheme();
+
+  // Use the mock portfolioData directly
+  const portfolioData = propPortfolioData || staticPortfolioData;
 
   // Refs for Intersection Observer to trigger animations
   const projectRefs = useRef([]);
@@ -20,7 +20,6 @@ export default function Home({ portfolioData }) { // Changed to default export f
 
   // Ref for the header to calculate offset
   const headerRef = useRef(null);
-
   // Intersection Observer for project animations
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -142,15 +141,12 @@ export default function Home({ portfolioData }) { // Changed to default export f
                 </a>
               </div>
             </div>
-            {/* Profile Picture (using Next.js Image component) */}
+            {/* Profile Picture (using standard img tag) */}
             <div className="md:flex-none flex justify-end">
-              <Image
-                src="/images/self.webp"
+              <img
+                src="/images/self.webp" // Placeholder for self.webp
                 alt="Hope Joshua Galang Profile"
                 className="rounded-lg w-[384px] h-[576px] object-cover"
-                width={384}
-                height={576}
-                priority
               />
             </div>
           </div>
@@ -163,7 +159,7 @@ export default function Home({ portfolioData }) { // Changed to default export f
         </section>
 
         {/* Projects Section - Parallax Waterfall */}
-        <section className="py-16">
+        <section id="projects" className="py-16"> {/* Moved id="projects" here */}
           {portfolioData.projects.map((project, index) => (
             <div
               key={project.id}
@@ -179,102 +175,51 @@ export default function Home({ portfolioData }) { // Changed to default export f
                 minHeight: '100vh',
               }}
             >
+              {/* Ensure this inner div takes full height of its parent and centers content */}
+              {/* Increased min-h to 200vh to allow for more scrolling before content moves */}
               <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[200vh]">
-                {project.id === 1 ? (
-                  <div className="flex w-full h-full items-center justify-center relative z-10">
-                    <div className="flex flex-col items-center justify-center space-y-2 absolute left-[8%] top-1/2 -translate-y-1/2">
-                      <div id="projects"></div>
-                      {project.technologies.map((tech, techIndex) => (
-                        <div
-                          key={tech.name}
-                          className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-popOut' : 'opacity-0'}`}
-                          style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
-                        >
-                          {tech.logo && (
-                            <Image
-                              src={tech.logo}
-                              alt={tech.name}
-                              className="w-16 h-32 object-contain mb-1"
-                              width={48}
-                              height={48}
-                              unoptimized={true}
-                              onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=${tech.name.substring(0,1)}`; }}
-                            />
-                          )}
-                          <span className="text-sm font-medium text-white">
-                            {tech.name}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex flex-col items-center text-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[70%]">
-                      <div className="relative px-8 py-4 flex flex-col items-center justify-center">
-                        <div className="absolute inset-0 rounded-full" style={{ backgroundColor: darkMode ? 'rgba(16, 24, 40, 0.5)' : 'rgba(243, 244, 246, 0.5)' }}></div>
-                        <h3
-                          id="cloud-services-title"
-                          className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
-                          style={{ animationDelay: '0.1s' }}
-                        >
-                          {project.title}
-                        </h3>
-                        <p
-                          className={`text-xl ${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
-                          style={{ animationDelay: '0.3s' }}
-                        >
-                          {project.description}
-                        </p>
-                      </div>
-                    </div>
+                {/* This is the container for the oval and the technologies */}
+                <div className="flex flex-col items-center text-center max-w-[70%]">
+                  {/* Oval (Title & Description) */}
+                  <div className="relative px-8 py-4 flex flex-col items-center justify-center mb-8">
+                    <div className="absolute inset-0 rounded-full" style={{ backgroundColor: darkMode ? 'rgba(16, 24, 40, 0.5)' : 'rgba(243, 244, 246, 0.5)' }}></div>
+                    <h3
+                      className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
+                      style={{ animationDelay: '0.1s' }}
+                    >
+                      {project.title}
+                    </h3>
+                    <p
+                      className={`text-xl ${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
+                      style={{ animationDelay: '0.3s' }}
+                    >
+                      {project.description}
+                    </p>
                   </div>
-                ) : (
-                  <div className="flex w-full h-full items-center justify-center relative z-10">
-                    <div className="flex flex-col items-center justify-center space-y-2 absolute left-[8%] top-1/2 -translate-y-1/2">
-                      {project.technologies.map((tech, techIndex) => (
-                        <div
-                          key={tech.name}
-                          className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-popOut' : 'opacity-0'}`}
-                          style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
-                        >
-                          {tech.logo && (
-                            <Image
-                              src={tech.logo}
-                              alt={tech.name}
-                              className="w-16 h-32 object-contain mb-1 rounded-lg"
-                              width={tech.logo.includes('img.icons8.com') ? 48 : tech.logo.includes('external-tal-revivo') ? 96 : tech.logo.includes('upload.wikimedia.org') ? 100 : tech.logo.includes('images.g2crowd.com') ? 100 : tech.logo.includes('cdn-1.webcatalog.io') ? 256 : tech.logo.includes('logodix.com') ? 100 : 100}
-                              height={tech.logo.includes('img.icons8.com') ? 48 : tech.logo.includes('external-tal-revivo') ? 96 : tech.logo.includes('upload.wikimedia.org') ? 100 : tech.logo.includes('images.g2crowd.com') ? 100 : tech.logo.includes('cdn-1.webcatalog.io') ? 256 : tech.logo.includes('logodix.com') ? 100 : 100}
-                              unoptimized={true}
-                              onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=${tech.name.substring(0,1)}`; }}
-                            />
-                          )}
-                          <span className="text-sm font-medium text-white">
-                            {tech.name}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
 
-                    <div className="flex flex-col items-center text-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[70%]">
-                      <div className="relative px-8 py-4 flex flex-col items-center justify-center">
-                        <div className="absolute inset-0 rounded-full" style={{ backgroundColor: darkMode ? 'rgba(16, 24, 40, 0.5)' : 'rgba(243, 244, 246, 0.5)' }}></div>
-                        <h3
-                          className={`text-5xl font-extrabold ${darkMode ? 'text-white' : 'text-gray-800'} relative z-10 ${projectsInView[`project-${project.id}`] ? 'animate-slideInFromTop' : 'opacity-0'}`}
-                          style={{ animationDelay: '0.1s' }}
-                        >
-                          {project.title}
-                        </h3>
-                        <p className={`${darkMode ? 'text-gray-200' : 'text-gray-700'} relative z-10`}>
-                          {project.description}
-                        </p>
+                  {/* Technologies (Icons) - positioned horizontally below the oval */}
+                  <div className="flex flex-row flex-wrap justify-center items-center gap-4">
+                    {project.technologies.map((tech, techIndex) => (
+                      <div
+                        key={tech.name}
+                        className={`flex flex-col items-center ${projectsInView[`project-${project.id}`] ? 'animate-popOut' : 'opacity-0'}`}
+                        style={{ animationDelay: `${0.5 + techIndex * 0.1}s` }}
+                      >
+                        {tech.logo && (
+                          <img
+                            src={tech.logo}
+                            alt={tech.name}
+                            className="w-12 h-12 object-contain rounded-lg"
+                            onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/48x48/CCCCCC/333333?text=${tech.name.substring(0,1)}`; }}
+                          />
+                        )}
+                        <span className="text-xs font-medium text-white mt-1">
+                          {tech.name}
+                        </span>
                       </div>
-                      {project.id === 2 && (
-                        <div className={`mt-6 relative z-10`}>
-                          <TerminalAnimation />
-                        </div>
-                      )}
-                    </div>
+                    ))}
                   </div>
-                )}
+                </div>
               </div>
             </div>
           ))}
@@ -285,32 +230,26 @@ export default function Home({ portfolioData }) { // Changed to default export f
           <h2 className={`text-4xl font-bold text-center mb-8 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}>Get In Touch</h2>
           <div className="text-center text-lg text-gray-700 dark:text-gray-300">
             <p className="mb-2 flex items-center justify-center">
-              <Image
+              <img
                 src="https://img.icons8.com/fluency/48/new-post.png"
                 alt="Email icon"
                 className="w-6 h-6 mr-2"
-                width={24} height={24}
-                unoptimized={true}
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=E`; }} />
               <a href={`mailto:${portfolioData.contactEmail}`} className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>{portfolioData.contactEmail}</a>
             </p>
             <p className="mb-2 flex items-center justify-center">
-              <Image
+              <img
                 src="https://img.icons8.com/color/48/github--v1.png"
                 alt="GitHub icon"
                 className="w-6 h-6 mr-2"
-                width={24} height={24}
-                unoptimized={true}
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=G`; }} />
             <a href={`https://github.com/${portfolioData.github}`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>github.com/{portfolioData.github}</a>
             </p>
             <p className="flex items-center justify-center">
-              <Image
+              <img
                 src="https://img.icons8.com/color/48/linkedin.png"
                 alt="LinkedIn icon"
                 className="w-6 h-6 mr-2"
-                width={24} height={24}
-                unoptimized={true}
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=L`; }} />
               <a href={`https://www.linkedin.com/in/galangjoshua/`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>linkedin.com/in/galangjoshua</a>
             </p>
@@ -326,15 +265,4 @@ export default function Home({ portfolioData }) { // Changed to default export f
       </div>
     </>
   );
-}
-
-// Next.js specific data fetching for static content
-export async function getStaticProps() {
-  // This runs at build time. For a real app, you'd fetch from your Django API here.
-  // For now, we use the local static data.
-  return {
-    props: {
-      portfolioData: staticPortfolioData,
-    },
-  };
 }
