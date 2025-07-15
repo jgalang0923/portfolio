@@ -5,20 +5,15 @@ import useTheme from '/src/hooks/useTheme';
 import ContactSection from '/src/pages/ContactSection';
 import TerminalAnimation from '/src/components/TerminalAnimation';
 
-export default function Home({ portfolioData: propPortfolioData }) { // Changed to default export for Next.js page
-  // Use the custom useTheme hook for all theme logic
+export default function Home({ portfolioData: propPortfolioData }) {
   const { darkMode, themePreference, setThemeLight, setThemeDark, setThemeSystem } = useTheme();
 
-  // Use the mock portfolioData directly
   const portfolioData = propPortfolioData || staticPortfolioData;
 
-  // Refs for Intersection Observer to trigger animations
   const projectRefs = useRef([]);
   const [projectsInView, setProjectsInView] = useState({});
 
-  // Ref for the header to calculate offset
   const headerRef = useRef(null);
-  // Intersection Observer for project animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -50,14 +45,12 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
     };
   }, [portfolioData.projects]);
 
-  // Smooth scroll function with offset for fixed header
   const scrollToSection = (e, id) => {
     e.preventDefault();
     const targetElement = document.getElementById(id);
     if (targetElement && headerRef.current) {
       const headerOffset = headerRef.current.offsetHeight;
       const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-      // Calculate scroll position to center the target element
       const offsetPosition = elementPosition - (window.innerHeight / 2) + (targetElement.offsetHeight / 2);
 
       window.scrollTo({
