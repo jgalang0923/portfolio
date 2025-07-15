@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image'; // Import Next.js Image component
 import { Sun, Moon, Monitor } from 'lucide-react';
 import TerminalAnimation from '/src/components/TerminalAnimation';
 import useTheme from '/src/hooks/useTheme';
-import { portfolioData as staticPortfolioData } from '/src/data/portfolioData'; // Renamed to avoid confusion with prop name
+import { portfolioData as staticPortfolioData } from '/src/data/portfolioData';
+import ContactSection from './ContactSection';
 
 // Main App Component for the portfolio
 // In Next.js, this is your page component. It receives data via props if getStaticProps is used.
@@ -255,7 +255,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
                     ))}
                   </div>
                     {project.id === 2 && (
-                    <div className={`mt-8 relative z-10 w-full flex justify-center ${projectsInView[`project-${project.id}`] }`} style={{ animationDelay: `${0.5 + project.technologies.length * 0.1 + 0.2}s` }}>
+                    <div className={`mt-8 relative z-10 w-full flex justify-center ${projectsInView[`project-${project.id}`]}`} style={{ animationDelay: `${0.5 + project.technologies.length * 0.1 + 0.2}s` }}>
                     <TerminalAnimation />
                     </div>
                     )}
@@ -264,38 +264,7 @@ export default function Home({ portfolioData: propPortfolioData }) { // Changed 
             </div>
           ))}
         </section>
-        {/* Contact Section */}
-        <section id="contact" className={`py-16 shadow-md rounded-lg mx-auto max-w-4xl mt-8 mb-12 px-6 lg:px-4 ${darkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
-          <h2 className={`text-4xl font-bold text-center mb-8 ${darkMode ? 'text-indigo-400' : 'text-indigo-700'}`}>Get In Touch</h2>
-          <div className="text-center text-lg text-gray-700 dark:text-gray-300">
-            <p className="mb-2 flex items-center justify-center">
-              <img
-                src="https://img.icons8.com/fluency/48/new-post.png"
-                alt="Email icon"
-                className="w-6 h-6 mr-2"
-                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=E`; }} />
-              <a href={`mailto:${portfolioData.contactEmail}`} className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>{portfolioData.contactEmail}</a>
-            </p>
-            <p className="mb-2 flex items-center justify-center">
-              <img
-                src="https://img.icons8.com/color/48/github--v1.png"
-                alt="GitHub icon"
-                className="w-6 h-6 mr-2"
-                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/24x24/CCCCCC/333333?text=G`; }} />
-            <a href={`https://github.com/${portfolioData.github}`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>github.com/{portfolioData.github}</a>
-            </p>
-            <p className="flex items-center justify-center">
-              <img
-                src="https://img.icons8.com/color/48/linkedin.png"
-                alt="LinkedIn icon"
-                className="w-6 h-6 mr-2"
-                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/64x64/CCCCCC/333333?text=L`; }} />
-              <a href={`https://www.linkedin.com/in/galangjoshua/`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>linkedin.com/in/galangjoshua</a>
-            </p>
-          </div>
-        </section>
-
-        {/* Footer */}
+         <ContactSection darkMode={darkMode} portfolioData={portfolioData} />
         <footer className={`py-8 text-center ${darkMode ? 'bg-gray-950 text-gray-400' : 'bg-[#1C398E] text-gray-100'}`}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-sm md:text-base">&copy; {new Date().getFullYear()} {portfolioData.name}. All rights reserved.</p>
