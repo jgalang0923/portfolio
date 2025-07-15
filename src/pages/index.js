@@ -5,8 +5,6 @@ import useTheme from '/src/hooks/useTheme';
 import ContactSection from './ContactSection';
 import TerminalAnimation from '/src/components/TerminalAnimation';
 
-// Main App Component for the portfolio
-// In Next.js, this is your page component. It receives data via props if getStaticProps is used.
 export default function Home({ portfolioData: propPortfolioData }) { // Changed to default export for Next.js page
   // Use the custom useTheme hook for all theme logic
   const { darkMode, themePreference, setThemeLight, setThemeDark, setThemeSystem } = useTheme();
