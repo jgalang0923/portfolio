@@ -135,7 +135,7 @@ export default function Home({ portfolioData: propPortfolioData }) {
                   View Portfolio
                 </a>
                 <a
-                  href="https://drive.usercontent.google.com/download?id=1atVtSXEr8ahoS79ReaEQ15o-xeREXLc7&export=download&authuser=0"
+                  href="https://drive.google.com/file/d/1upEzGSWpVNyQ52FWHwWvdSN715hlkGLX/view?usp=drive_link"
                   className={`font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ${darkMode ? 'bg-gray-700 text-gray-100 hover:bg-gray-600' : 'bg-gray-300 text-gray-800 hover:bg-gray-400'}`}
                   target="_blank"
                   rel="noopener noreferrer"
