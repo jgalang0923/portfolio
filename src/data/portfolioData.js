@@ -53,13 +53,13 @@ export const portfolioData = {
     },
         {
       id: 4,
-      title: "Containerization",
-      description: "Experienced with using containers to make it easier to run, grow, and manage apps in different systems during development and production.",
+      title: "DevOps Specialist",
+      description: "Experienced with containerization for efficient scalability on different systems during development and production.",
       technologies: [
-        { name: "Docker", logo: "https://img.icons8.com/fluency/50/container.webp" },
+        { name: "Docker", logo: "https://img.icons8.com/fluency/48/docker.png" },
       ],
       backgroundColor: "#03fcdb",
-      background: "/images/docker.webp",
+      background: "/images/container.webp",
     },
     {
       id: 5,
